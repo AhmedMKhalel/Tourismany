@@ -1,0 +1,97 @@
+﻿@model IEnumerable<TourismPlaces.ViewModels.Admin.AdminApprovePlaceViewModel>;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Approve";
+
+}
+
+
+<div class="row">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Welcome to your Places</h2>
+
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Place name
+                                        </th>
+
+                                        <th>
+                                            Rate
+                                        </th>
+                                        <th>
+                                            Entry price (EGP)
+                                        </th>
+                                        <th>
+                                            Government
+                                        </th>
+                                        <th>
+                                            Owner
+                                        </th>
+                                        <th>
+                                            Approved
+                                        </th>
+                                       
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var place in Model)
+                                    {
+                                        <tr>
+                                            <td>#</td>
+                                            <td>@place.PlaceName</td>
+                                            <td>@place.Rate</td>
+                                            <td>@place.EntryPrice</td>
+                                            <td>@place.CovernmentName</td>
+                                            <td>@place.Owner</td>
+                                            <td>#</td>
+                                        </tr>
+                                        
+                                    }
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script src="~/Datatable/plugins/jquery/jquery.min.js"></script>
+<script src="~/Datatable/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="~/Datatable/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+<script>
+    $(function () {
+        $('.js-basic-example').DataTable({
+            responsive: true,
+            paging: true,
+            pageLength: 5,
+            bSort: true,
+            bFilter: true,
+            //bLengthChange: false,
+            //bInfo: false,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+
+        });
+    });
+
+</script>

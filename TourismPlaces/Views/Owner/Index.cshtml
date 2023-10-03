@@ -1,0 +1,160 @@
+﻿@model IEnumerable<TourismPlaces.ViewModels.PlacesRetrieveViewModel>
+
+@{
+     Layout = "~/Views/Shared/_OwnerLayout.cshtml";
+ //Layout = "";
+    ViewBag.Title = "Index";
+
+}
+@{
+    int counter = 1;
+}
+
+
+@*<!-- Bootstrap Core Css -->
+<link rel="stylesheet" href="~/Datatable/plugins/bootstrap/css/bootstrap.css">
+
+<!-- JQuery DataTable Css -->
+<link href="~/Datatable/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">*@
+
+@*<link rel="stylesheet" href="~/Datatable/bootstrap.css">
+<link rel="stylesheet" href="~/Datatable/dataTables.bootstrap4.min.css">*@
+
+
+
+<div class="row">
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Welcome to your Places</h2>
+                        <a asp-action="AddPlace" asp-controller="Owner" class="btn btn-success btn-rounded btn-fw">Add place</a>
+                  
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Place name
+                                    </th>
+                                 
+                                    <th>
+                                        Rate
+                                    </th>
+                                    <th>
+                                        Entry price (EGP)
+                                    </th>
+                                    <th>
+                                        Government
+                                    </th>
+                                    <th>
+                                        Photos number
+                                    </th>
+                                      <th>
+                                        Live
+                                    </th>
+                                    <th>
+                                        Approved
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                               
+                                @foreach (var place in Model)
+                                {
+                                    <tr class="text-center">
+                                        <td>@(counter++)</td>
+                                        <td>@place.Name</td>
+                                           
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width:@(place.rate*20)%" aria-valuemax="100">
+                                                        @(place.rate)
+                                                        </div>
+                                                </div>
+                                            </td>
+
+                                        <td>@place.EntrancePrice</td>
+                                        <td>@place.GovernmentName</td>
+                                        <td>@place.PhotosNumber</td>
+
+                                        @if (!place.IsDeleted)
+                                        {
+                                            <td><span class="badge badge-success">Active</span></td>
+                                        }
+                                        else
+                                        {
+
+                                            <td><span class=" badge badge-danger">Inactive</span></td>
+
+                                        }
+
+                                            @if (place.IsApproved)
+                                        {
+                                            <td><span class="badge badge-info">Approved</span></td>
+                                        }
+                                        else
+                                        {
+
+                                            <td><span class=" badge badge-warning">Pending..</span></td>
+
+                                        }
+                                        
+                                        <td>
+                                                <a asp-action="PlaceDetails" asp-controller="Owner" asp-route-placeId="@place.PlaceId" class="  btn btn-primary btn-rounded btn-fw">Details</a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+@*<script src="~/Datatable/jquery.js" type="text/javascript"></script>
+<script src="~/Datatable/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="~/Datatable/dataTables.bootstrap4.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Datatable/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Datatable/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="~/Datatable/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>*@
+    <script>
+
+        $(function () {
+                $('.js-basic-example').DataTable({
+                responsive: true,
+                paging: true,
+                pageLength: 5,
+                bSort: true,
+                bFilter: true,
+                //bLengthChange: false,
+                //bInfo: false,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+
+            });
+        });
+
+    </script>
+
+
+
+
